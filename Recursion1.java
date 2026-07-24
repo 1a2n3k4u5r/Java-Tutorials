@@ -95,24 +95,86 @@
 // 3) Base case = nth term
 
 
-public class Recursion1 {
-    public static void printFib(int a, int b, int n){
-        if(n == 0){
-            return;
-        }
-        int c = a + b;
-        System.out.println(c);
-        printFib(b, c, n-1);
-    }
+// public class Recursion1 {
+//     public static void printFib(int a, int b, int n){
+//         if(n == 0){
+//             return;
+//         }
+//         int c = a + b;
+//         System.out.println(c);
+//         printFib(b, c, n-1);
+//     }
 
-    public static void main(String args[]){
-      int a =0, b = 1;
-      System.out.println(a);
-      System.out.println(b);
-      int n = 7;
-      printFib(a, b, n-2);
-    }
-}  // output = 0,1,1,2,3,5,8
+//     public static void main(String args[]){
+//       int a =0, b = 1;
+//       System.out.println(a);
+//       System.out.println(b);
+//       int n = 7;
+//       printFib(a, b, n-2);
+//     }
+// }  // output = 0,1,1,2,3,5,8
 
 
 // print x^n(stack height = n)
+// x^n = x*x*x*x---- n times
+// 1) x, n
+// 2) kaam, x^n = x * (x^n-1) => x^n-1+1 = x^n
+// 3) x^0 = 1, X=0 => 0.  2 base case
+
+// public class Recursion1 {
+//     public static int calcPower(int x, int n){
+//        if(n == 0){ //base case 1
+//           return 1;
+//        }
+//        if(x == 0){ //base case 2
+//           return 0;
+//        }
+//        int xPownm1 = calcPower(x, n-1); //kaam 
+//        int xPown = x * xPownm1;
+//        return xPown;
+//     }
+//     public static void main(String args[]){
+//       int x = 2, n = 5;
+//       int ans = calcPower(x, n);
+//       System.out.println(ans);
+//     }
+
+// }
+
+
+
+// Print x^n (stack height = logn)
+ public class Recursion1 {
+
+    public static int calcPower(int x, int n) {
+
+        // Base Case 1
+        if (n == 0) {
+            return 1;
+        }
+
+        // Base Case 2
+        if (x == 0) {
+            return 0;
+        }
+
+        int halfPower = calcPower(x, n / 2);
+
+        // If n is even
+        if (n % 2 == 0) {
+            return halfPower * halfPower;
+        }
+        // If n is odd
+        else {
+            return halfPower * halfPower * x;
+        }
+    }
+
+    public static void main(String[] args) {
+        int x = 2;
+        int n = 5;
+
+        int ans = calcPower(x, n);
+        System.out.println(ans);
+    }
+}
